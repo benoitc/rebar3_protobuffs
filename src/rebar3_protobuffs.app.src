@@ -11,5 +11,5 @@
 
   {maintainers, ["Benoit Chesneau"]},
   {licenses, ["BSD"]},
-  {links, ["https://github.com/benoitc/rebar3_protobuffs"]}
+  {links, [{"Github", "https://github.com/benoitc/rebar3_protobuffs"}]}
  ]}.
