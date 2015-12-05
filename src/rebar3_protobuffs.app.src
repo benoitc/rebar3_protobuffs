@@ -1,0 +1,15 @@
+{application, 'rebar3_protobuffs',
+ [{description, "A rebar plugin"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {contributors, ["Benoit Chesneau"]},
+  {licenses, ["BSD"]},
+  {links, ["https://github.com/benoitc/rebar3_protobuffs"]}
+ ]}.
