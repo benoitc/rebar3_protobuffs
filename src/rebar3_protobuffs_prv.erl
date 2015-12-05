@@ -37,10 +37,18 @@ do(State) ->
     [begin
          Opts = rebar_app_info:opts(AppInfo),
          SourceDir = filename:join(rebar_app_info:dir(AppInfo), "src"),
+         IncDir = filename:join(rebar_app_info:dir(AppInfo), "include"),
          OutDir = rebar_app_info:out_dir(AppInfo),
+         %% ensure all dirs exist
+         filelib:ensure_dir(IncDir ++ "/"),
+         OutIncDir = filename:join([OutDir, "include"]),
+         filelib:ensure_dir(OutIncDir ++ "/"),
+         OutEbinDir = filename:join(OutDir, "ebin") ++ "/",
+         filelib:ensure_dir(OutEbinDir ++ "/"),
+
          FoundFiles = rebar_utils:find_files(SourceDir, ".*\\.proto\$"),
          CompileFun = fun(Source, _Opts) ->
-                              proto_compile(Source, OutDir)
+                              proto_compile(Source, OutIncDir, OutEbinDir)
                       end,
 
          rebar_base_compiler:run(Opts, [], FoundFiles, CompileFun)
@@ -48,13 +56,7 @@ do(State) ->
     {ok, State}.
 
 
-proto_compile(Source, OutDir) ->
-    %% make sure an "include" exists, fixing waiting for a fix
-    filelib:ensure_dir("include/"),
-    IncDir = filename:join([OutDir, "include"]),
-    filelib:ensure_dir(IncDir ++ "/"),
-    EbinDir = filename:join(OutDir, "ebin") ++ "/",
-    filelib:ensure_dir(EbinDir ++ "/"),
+proto_compile(Source, IncDir, EbinDir) ->
     ok = protobuffs_compile:scan_file(Source, [{output_include_dir, IncDir},
                                                {output_ebin_dir, EbinDir}]).
 
