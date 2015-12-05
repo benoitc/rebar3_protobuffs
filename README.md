@@ -2,7 +2,7 @@ rebar3 protobuffs provider
 ==========================
 
 Provider to compile protobuffers files using
-[protbuffers](https://github.com/basho/protobuffs).
+[protobuffers](https://github.com/basho/protobuffs).
 
 Place your `.proto` files in `src` directory and they will be automatically
 build.
