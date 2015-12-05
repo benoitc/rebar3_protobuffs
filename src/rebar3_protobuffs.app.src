@@ -9,7 +9,7 @@
   {env,[]},
   {modules, []},
 
-  {contributors, ["Benoit Chesneau"]},
+  {maintainers, ["Benoit Chesneau"]},
   {licenses, ["BSD"]},
   {links, ["https://github.com/benoitc/rebar3_protobuffs"]}
  ]}.
