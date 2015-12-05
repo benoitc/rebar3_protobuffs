@@ -1,26 +1,26 @@
-rebar3_protobuffs
-=====
+rebar3 protobuffs provider
+==========================
 
-A rebar plugin
+Provider to compile protobuffers files using
+[protbuffers](https://github.com/basho/protobuffs).
 
-Build
+Place your `.proto` files in `src` directory and they will be automatically
+build.
+
+Usage
 -----
-
-    $ rebar3 compile
-
-Use
----
 
 Add the plugin to your rebar config:
 
-    {plugins, [
-        { rebar3_protobuffs, ".*", {git, "git@host:user/rebar3_protobuffs.git", {tag, "0.1.0"}}}
-    ]}.
+```erlang
+    {plugins, [rebar3_protobuffs]}.
+```
 
-Then just call your plugin directly in an existing application:
+The compile function is under the protobuffs namespace. To automatically compile `.proto` files before
+the Erlang compiler add the pre_hook to rebar.config:
 
-
-    $ rebar3 rebar3_protobuffs
-    ===> Fetching rebar3_protobuffs
-    ===> Compiling rebar3_protobuffs
-    <Plugin Output>
+```erlang
+{provider_hooks, [
+                 {pre, [{compile, {protobuffs, compile}}]}
+                 ]}.
+```
