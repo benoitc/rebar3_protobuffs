@@ -40,8 +40,8 @@ do(State) ->
             undefined ->
                 ProtobuffsOpts = rebar_state:get(State, protobuffs_opts, []),
                 proplists:get_value(imports_dir, ProtobuffsOpts, []);
-            ImportsDir ->
-                ImportsDir
+            ImportsDir0 ->
+                ImportsDir0
         end,
 
     [begin
