@@ -49,6 +49,7 @@ do(State) ->
          SourceDir = filename:join(rebar_app_info:dir(AppInfo), "src"),
          IncDir = filename:join(rebar_app_info:dir(AppInfo), "include"),
          OutDir = rebar_app_info:out_dir(AppInfo),
+         ImportsDir2 = [filename:join(rebar_app_info:dir(AppInfo), ImportsDir), ImportsDir],
          %% ensure all dirs exist
          filelib:ensure_dir(IncDir ++ "/"),
          OutIncDir = filename:join([OutDir, "include"]),
@@ -57,7 +58,7 @@ do(State) ->
          filelib:ensure_dir(OutEbinDir ++ "/"),
 
          CompileFun = fun(Source, _Target, _Opts) ->
-                              proto_compile(Source, OutIncDir, OutEbinDir, ImportsDir)
+                              proto_compile(Source, OutIncDir, OutEbinDir, ImportsDir2)
                       end,
 
          rebar_base_compiler:run(Opts, [], SourceDir, ".proto", OutEbinDir, "_pb.beam", CompileFun)
