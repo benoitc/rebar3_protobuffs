@@ -21,6 +21,13 @@ the Erlang compiler add the pre_hook to rebar.config:
 
 ```erlang
 {provider_hooks, [
-                 {pre, [{compile, {protobuffs, compile}}]}
+                 {pre, [{compile, {protobuffs, compile}}, {clean, {protobuffs, clean}}]}
                  ]}.
+```
+
+Add opts for protobuffs compiler, but just support `imports_dir` now :
+```erlang
+{protobuffs_opts, [
+    {imports_dir, ["src/protobuf/"]}
+]}.
 ```
